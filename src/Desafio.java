@@ -1,5 +1,3 @@
-import com.sun.security.jgss.GSSUtil;
-
 import java.util.Scanner;
 
 public class Desafio {
@@ -8,27 +6,29 @@ public class Desafio {
         Scanner scanner = new Scanner(System.in);
         String tipoCofre = scanner.nextLine();
 
-        // TODO: Implemente a condição necessário para a verificação dos cofres seguros:
         if (tipoCofre.equalsIgnoreCase("digital")) {
-            int senha = Integer.parseInt(scanner.nextLine());
-            int confirmacaoSenha = Integer.parseInt(scanner.nextLine());
+            int senha;
+            int confirmacaoSenha;
+
+            // Lê a senha e a confirmação de senha
+            senha = scanner.nextInt();
+            confirmacaoSenha = scanner.nextInt();
 
             CofreDigital cofreDigital = new CofreDigital(senha);
 
-            //Verifica se a senha está correta
+            // Verifica se a senha é válida
             if (cofreDigital.validarSenha(confirmacaoSenha)) {
-                System.out.println("Tipo: Cofre Digital");
-                System.out.println("Metodo de abertura: Senha");
+                cofreDigital.imprimirInformacoes();
                 System.out.println("Cofre aberto!");
             } else {
-                System.out.println("Tipo: Cofre Digital");
-                System.out.println("Metodo de abertura: Senha");
+                cofreDigital.imprimirInformacoes();
                 System.out.println("Senha incorreta!");
             }
         } else if (tipoCofre.equalsIgnoreCase("fisico")) {
             CofreFisico cofreFisico = new CofreFisico();
             cofreFisico.imprimirInformacoes();
+        } else {
+            System.out.println("Tipo de cofre inválido.");
         }
-        scanner.close();
     }
 }
